@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>body { margin: 0; background: transparent; }</style>
+</head>
+<body>
+
+<!-- UTILITY MENU (FLOAT PANEL) -->
+<div style="position: fixed; right: 20px; top: 55%; transform: translateY(-50%); z-index: 999999; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+<div id="toolsBtn" class="float-btn" data-tooltip="Utility Menu" onclick="const menu = document.getElementById('collapsibleMenu'); const isOpen = menu.style.maxHeight !== '0px' &amp;&amp; menu.style.maxHeight !== ''; menu.style.maxHeight = isOpen ? '0px' : '400px'; menu.style.opacity = isOpen ? '0' : '1'; menu.style.pointerEvents = isOpen ? 'none' : 'auto'; menu.style.padding = isOpen ? '0px' : '10px'; this.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)'; this.innerHTML = isOpen ? '🔲' : '🔲';" style="width: 50px; height: 50px; background: rgba(30, 32, 39, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 2px solid #363a45; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.4s, border-color 0.3s; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); font-size: 1.4em; user-select: none;">🔲</div>
+<div id="collapsibleMenu" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; max-height: 0px; opacity: 0; pointer-events: none; transition: all 0.4s ease; overflow: hidden; background: rgba(15, 17, 23, 0.85); padding: 0px; border-radius: 14px; border: 1px solid rgba(54, 58, 69, 0.5); backdrop-filter: blur(10px); width: 60px;">
+<div class="float-btn" title="Change Background" onclick="const root=document.documentElement; let c=prompt('Enter the background image URL (or leave blank to reset)):'); if(c!==null){ if(c.trim()!==''){ root.style.setProperty('--theme-background-override-image', 'url(\'' + c.trim() + '\')'); this.innerHTML='🖼️'; } else { root.style.setProperty('--theme-background-override-image', 'none'); this.innerHTML='🚫'; } }" onmouseover="this.style.boxShadow='0 0 15px rgba(180, 80, 255, 0.6)'; this.style.borderColor='#b450ff'; this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.borderColor='#363a45';" style="width: 45px; height: 45px; background: rgba(30, 32, 39, 0.9); border: 1px solid #363a45; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 1.2em; color: white;">🖼️</div>
+<div class="float-btn" title="Celebrate!" onclick="for(let i=0;i&lt;60;i++){let c=document.createElement('div');c.style.cssText='position:fixed;width:8px;height:8px;background:'+['#00a8ff','#fbc531','#4cd137','#8a2be2'][Math.floor(Math.random()*4)]+';top:-10px;left:'+Math.random()*100+'vw;z-index:2147483647;pointer-events:none;border-radius:'+(Math.random()&gt;0.5?'50%':'2px')+';transition:transform '+(1+Math.random()*1.5)+'s cubic-bezier(.25,.46,.45,.94),opacity '+(1+Math.random()*1.5)+'s ease-in;';document.body.appendChild(c);setTimeout(()=&gt;{c.style.transform='translateY(110vh) translateX('+(Math.random()*200-100)+'px) rotate('+(Math.random()*720)+'deg)';c.style.opacity='0';},30);setTimeout(()=&gt;c.remove(),2500);}" onmouseover="this.style.transform='scale(1.1) rotate(10deg)'; this.style.boxShadow='0 0 15px rgba(251, 197, 49, 0.6)'; this.style.borderColor='#fbc531';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='none'; this.style.borderColor='#363a45';" style="width: 45px; height: 45px; background: rgba(30, 32, 39, 0.9); border: 1px solid #363a45; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 1.2em;">🎉</div>
+<div class="float-btn" title="Copy Club Link" onclick="navigator.clipboard.writeText('https://www.chess.com/club/respect-to-stormtroopers'); let og=this.innerHTML; this.innerHTML='✔️'; setTimeout(()=&gt;{this.innerHTML=og;},900);" onmouseover="this.style.boxShadow='0 0 15px rgba(76, 209, 55, 0.6)'; this.style.borderColor='#4cd137'; this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.borderColor='#363a45';" style="width: 45px; height: 45px; background: rgba(30, 32, 39, 0.9); border: 1px solid #363a45; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 1.2em;">🔗</div>
+<a href="https://www.chess.com/club/respect-to-stormtroopers-star-destroyer" target="_blank" rel="noopener" title="RSSD" class="float-btn" onmouseover="this.style.boxShadow='0 0 15px rgba(231, 76, 60, 0.6)'; this.style.borderColor='#e74c3c'; this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.borderColor='#363a45';" style="width: 45px; height: 45px; background: rgba(30, 32, 39, 0.9); border: 1px solid #363a45; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 1.2em; text-decoration: none;">⚔️</a>
+<div class="float-btn" title="Scanner" onclick="const l=document.getElementById('scanLine') || document.createElement('div'); l.id='scanLine'; l.style.cssText='position:fixed;top:0;left:0;width:100%;height:10px;background:#00ccff;box-shadow:0 0 15px #00ccff;z-index:999999;transition:slow;opacity:1;'; document.body.appendChild(l); let y=0, a=setInterval(()=&gt;{y+=15;l.style.top=y+'px';if(y&gt;window.innerHeight){clearInterval(a);l.remove();}},15)" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 15px rgba(0, 168, 255, 0.6)'; this.style.borderColor='#00a8ff';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.borderColor='#363a45';" style="width: 45px; height: 45px; background: rgba(30, 32, 39, 0.9); border: 1px solid #363a45; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 1.2em;">📡</div>
+</div>
+</div>
+<!--======================================M O U S E   P A R T    B E G I N S=====================================-->
+<p><svg style="display: none;" onload="if(!window.rrMouseInit){window.rrMouseInit=1;
+
+const cS=document.createElement('style');
+
+cS.innerHTML=
+'.rr-mouse-seg{position:fixed;pointer-events:none;z-index:2147483646!important;transform:translate(-50%,-50%);border-radius:50%;border:1px solid #2a1f10;box-sizing:border-box;}' +
+'.rr-mouse-head{width:35px;height:35px;border-radius:50%;background:#ffffff;border:2px solid #2a1f10;box-shadow:0 0 8px #2a1f10;overflow:hidden;z-index:2147483647!important;}' +
+'.rr-mouse-head img{width:100%;height:100%;display:block;object-fit:cover;}' +
+'.rr-no-cursor *{cursor:none!important;}';
+
+document.head.appendChild(cS);
+
+const num=24;
+let segs=[];
+window.rrMouseSegments=segs;
+let pts=[];
+let aId=null;
+let mx=-100;
+let my=-100;
+let time=0;
+
+const logoUrl='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSEdkdGoYfDDRNuY5-mw9e8CCoKnjw74b4Ksg-JetdTw&amp;s=10';
+
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX;
+  my=e.clientY;
+});
+
+window.addEventListener('message', function(e){
+    if(!e.data)return;
+
+    var frame;
+
+    if(e.data.type==='republic-mouse'){
+        frame=document.getElementById('republicSnake');
+    }
+
+    if(e.data.type==='republic-mouse-calendar'){
+        frame=document.getElementById('republicCalendar');
+    }
+
+    if(!frame)return;
+
+    var rect=frame.getBoundingClientRect();
+
+    mx=rect.left+e.data.x;
+    my=rect.top+e.data.y;
+});
+window.addEventListener('message',function(e){
+  if(!e.data || e.data.type!=='republic-mouse')return;
+
+  var frame=null;
+
+  var snake=document.getElementById('republicSnake');
+  var calendar=document.getElementById('republicCalendar');
+
+  if(e.source===snake.contentWindow){
+    frame=snake;
+  }else if(e.source===calendar.contentWindow){
+    frame=calendar;
+  }
+
+  if(!frame)return;
+
+  var rect=frame.getBoundingClientRect();
+
+  mx=rect.left+e.data.x;
+  my=rect.top+e.data.y;
+});
+function startRepublicMouse(){
+
+    if(segs.length&gt;0)return;
+
+    pts=Array(num).fill().map(function(){
+        return {x:mx,y:my};
+    });
+
+    for(let i=0;i&lt;num;i++){
+
+        let d=document.createElement('div');
+
+        d.className=i===0
+            ?'rr-mouse-seg rr-mouse-head'
+            :'rr-mouse-seg';
+
+        if(i===0){
+
+            let img=document.createElement('img');
+            img.src=logoUrl;
+            img.alt='Rook Republic';
+            d.appendChild(img);
+
+        }else{
+
+            let sz=Math.max(3,11-i*0.70);
+
+            d.style.width=sz+'px';
+            d.style.height=sz+'px';
+
+            d.style.background=
+                i&lt;7
+                    ?'#0c0905'
+                    :i&lt;14
+                        ?'#0c0905'
+                        :'#0c0905';
+
+            d.style.boxShadow=
+                i&lt;7
+                    ?'0 0 6px #2a1f10'
+                    :'none';
+        }
+
+        document.body.appendChild(d);
+        segs.push(d);
+    }
+
+    document.body.classList.add('rr-no-cursor');
+
+    time=0;
+    anim();
+}
+
+function anim(){
+
+    time+=0.2;
+
+    let dx=mx-pts[0].x;
+    let dy=my-pts[0].y;
+
+    pts[0].x+=dx*0.4;
+    pts[0].y+=dy*0.4;
+
+    for(let i=1;i&lt;num;i++){
+
+        pts[i].x+=(pts[i-1].x-pts[i].x)*0.45;
+        pts[i].y+=(pts[i-1].y-pts[i].y)*0.45;
+    }
+
+    for(let i=0;i&lt;num;i++){
+
+        if(!segs[i])continue;
+
+        if(i===0){
+
+            segs[i].style.left=pts[i].x+'px';
+            segs[i].style.top=pts[i].y+'px';
+
+        }else{
+
+            let vx=pts[i-1].x-pts[i].x;
+            let vy=pts[i-1].y-pts[i].y;
+
+            let dist=Math.sqrt(vx*vx+vy*vy);
+
+            let pX=0;
+            let pY=0;
+
+            if(dist&gt;0){
+                pX=-vy/dist;
+                pY=vx/dist;
+            }
+
+            let wave=Math.sin(time-i*0.3)*(i*1.2);
+
+            segs[i].style.left=
+                (pts[i].x+pX*wave)+'px';
+
+            segs[i].style.top=
+                (pts[i].y+pY*wave)+'px';
+        }
+    }
+
+    aId=requestAnimationFrame(anim);
+}
+
+startRepublicMouse();
+
+}"> </svg></p>
+<!--======================================M O U S E   P A R T    E N D S=====================================-->
+<p></p>
+<!-- Back to Top Button -->
+<div id="backToTop" title="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 25px rgba(0, 0, 0, 0.9)'; this.style.borderColor='rgba(0, 0, 0, 1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 15px rgba(0, 0, 0, 0.4)'; this.style.borderColor='rgba(0, 0, 0, 0.75)';" style="position: fixed; bottom: 90px; right: 30px; width: 50px; height: 50px; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(0, 0, 0, 0.75); border-top: 2px solid rgba(0, 0, 0, 0.75); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); user-select: none;"><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Duo-Owl/phpsh39iams6ci97r6KPiP.png" style="display: block; margin: 0 auto;" class="imageUploaderImg" alt="Top" width="25" height="25" /></div>
+<!-- Back to Bottom Button -->
+<div id="backToBottom" title="Scroll to bottom" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 25px rgba(0, 0, 0, 0.9)'; this.style.borderColor='rgba(0, 0, 0, 1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 15px rgba(0, 0, 0, 0.4)'; this.style.borderColor='rgba(0, 0, 0, 0.75)';" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(0, 0, 0, 0.75); border-top: 2px solid rgba(0, 0, 0, 0.75); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); user-select: none;"><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Duo-Owl/phpmnilmuhl6vdracKfW5g.png" style="display: block; margin: 0 auto;" class="imageUploaderImg" alt="Bottom" width="25" height="25" /></div>
+<!-- Main Card Deck -->
+<div onmouseover="this.style.transform='translateY(-3px) scale(1.01)'; this.style.boxShadow='0 0 25px rgba(255, 255, 255, 0.25)'; this.style.borderColor='#ffffff';" onmouseout="this.style.transform='translateY(0px) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'; this.style.borderColor='#222222';" style="background: #000000; border: 1px solid #222222; border-radius: 12px; padding: 30px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; max-width: 320px; margin: 0 auto; box-sizing: border-box;"><!-- Replaced Owner Deck  -->
+<p style="-webkit-box-reflect: below -5px linear-gradient(transparent, rgba(255,255,255,0.5)); text-align: center; margin-bottom: 25px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;"><strong><span style="background: linear-gradient(#ffffff, #737373) text; color: transparent;">RESPECT TO STORMTROOPERS</span></strong></span></p>
+<!-- Navigation Options -->
+<div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 35px;">
+<div onmouseover="this.style.background='#111'; this.style.paddingLeft='20px'; this.style.borderColor='#ffffff';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px'; this.style.borderColor='#333';" style="border-left: 2px solid #333; padding: 10px 12px; transition: 0.3s; cursor: pointer;"><a href="https://www.chess.com/club/respect-to-stormtroopers" style="color: #ffffff; font-weight: 500; text-decoration: none; display: block; font-size: 13px;">HOME</a></div>
+<div onmouseover="this.style.background='#111'; this.style.paddingLeft='20px'; this.style.borderColor='#ffffff';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px'; this.style.borderColor='#333';" style="border-left: 2px solid #333; padding: 10px 12px; transition: 0.3s; cursor: pointer;"><a href="https://www.chess.com/club/respect-to-stormtroopers-star-destroyer" style="color: #ffffff; font-weight: 500; text-decoration: none; display: block; font-size: 13px;">Visit RSSD</a></div>
+<div onmouseover="this.style.background='#111'; this.style.paddingLeft='20px'; this.style.borderColor='#ffffff';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px'; this.style.borderColor='#333';" style="border-left: 2px solid #333; padding: 10px 12px; transition: 0.3s; cursor: pointer;"><a href="https://www.chess.com/clubs/forum/view/rules-about-us" target="_blank" style="color: #ffffff; font-weight: 500; text-decoration: none; display: block; font-size: 13px;" rel="noopener">RULES</a></div>
+<!-- COLLAPSIBLE UTILITY & COMMUNITY MENU -->
+<div>
+<div onclick="var menu = document.getElementById('utilityMenu'); if(menu.style.display === 'none' || menu.style.display === '') { menu.style.display = 'flex'; } else { menu.style.display = 'none'; }" onmouseover="this.style.background='#111'; this.style.paddingLeft='20px'; this.style.borderColor='#ffffff';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px'; this.style.borderColor='#333';" style="border-left: 2px solid #333; padding: 10px 12px; transition: 0.3s; cursor: pointer; color: #ffffff; font-weight: 500; font-size: 13px;">UTILITY MENU</div>
+<div id="utilityMenu" style="display: none; flex-direction: column; gap: 8px; padding: 10px 0 5px 15px; margin-top: 5px; border-left: 2px dashed #333;"><a href="https://www.chess.com/clubs/events/respect-to-stormtroopers" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Events</a> <a href="https://www.chess.com/club/events/respect-to-stormtroopers" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Notes</a> <a href="https://www.chess.com/clubs/forum/respect-to-stormtroopers" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Forums</a> <a href="https://www.chess.com/clubs/forum/view/choosing-sidebar-music-1" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Choosing Sidebar Music&nbsp;</a> <a href="https://www.chess.com/clubs/forum/view/funny-videos-33" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Funny Videos</a> <a href="https://www.chess.com/clubs/forum/view/lego-star-wars-2" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Lego Star Wars</a></div>
+</div>
+<!-- COLLAPSIBLE OTHER CLUBS MENU -->
+<div>
+<div onclick="var menu = document.getElementById('otherClubsMenu'); if(menu.style.display === 'none' || menu.style.display === '') { menu.style.display = 'flex'; } else { menu.style.display = 'none'; }" onmouseover="this.style.background='#111'; this.style.paddingLeft='20px'; this.style.borderColor='#ffffff';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px'; this.style.borderColor='#333';" style="border-left: 2px solid #333; padding: 10px 12px; transition: 0.3s; cursor: pointer; color: #ffffff; font-weight: 500; font-size: 13px;">LINKS TO OTHER CLUBS&nbsp;</div>
+<div id="otherClubsMenu" style="display: none; flex-direction: column; gap: 8px; padding: 10px 0 5px 15px; margin-top: 5px; border-left: 2px dashed #333;"><a href="https://www.chess.com/club/star-wars-meme-club" target="_blank" style="color: #888888; text-decoration: none; font-size: 12px; transition: 0.2s;" onmouseover="this.style.color='#ffffff';" onmouseout="this.style.color='#888888';" rel="noopener">▪ Star Wars Meme Club</a></div>
+</div>
+<!-- SECOND MARQUEE -->
+<p><marquee scrollamount="4" style="color: #ffffff; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-family: 'Segoe UI', sans-serif; font-weight: 600; margin-top: 15px; display: block;">Join us for : &bull; SA position &bull; funny daily memes &bull; 100% activity rate &bull; fine people &bull; And a lot more 😉!</marquee></p>
+<p><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Stefan-Mazarine/phpr3utfvmkqars28H7pJO.gif" style="display: block; margin: 0 auto;" class="imageUploaderImg" alt="" width="360" height="202" /></p>
+<!-- Enlist Action Button -->
+<div onmouseover="this.style.background='#e6e6e6'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 0 15px rgba(255,255,255,0.6)';" onmouseout="this.style.background='#ffffff'; this.style.transform='scale(1)'; this.style.boxShadow='none';" style="background: #ffffff; margin-top: 10px; padding: 14px; transition: 0.3s; cursor: pointer; text-align: center; border-radius: 4px; border: none;"><a href="https://www.chess.com/club/respect-to-stormtroopers/join" style="color: #000000; font-weight: 800; text-decoration: none; display: block; width: 100%; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">Enlist</a></div>
+<div onmouseover="this.style.transform='translateY(-3px) scale(1.01)'; this.style.boxShadow='0 0 25px rgba(255, 255, 255, 0.25)'; this.style.borderColor='#ffffff';" onmouseout="this.style.transform='translateY(0px) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'; this.style.borderColor='#222222';" style="background: #000000; border: 1px solid #222222; border-radius: 12px; padding: 25px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; max-width: 320px; margin: 0 auto; box-sizing: border-box; will-change: transform; transform: translateZ(0); text-align: center;">
+<p style="font-size: 18px; text-align: center;"><span style="font-size: 20px;">Execute Order 66</span><span style="text-shadow: #ffffff 0px 0px 10px, #ffffff 0px 0px 15px; font-size: 20px; color: #000000;"><strong></strong></span></p>
+<table style="width: 93.1655%; max-width: 300px; border-collapse: collapse; background: transparent; font-family: sans-serif;">
+<tbody>
+<tr>
+<td style="width: 37.6585%; vertical-align: middle;">
+<div style="width: 34px; height: 33px; overflow: hidden; border-radius: 50%; border: 1px solid #000000; box-shadow: 0 0 10px #00ffff;"><audio style="width: 200px; height: 32px; margin-left: -10px; filter: invert(1);" controls="controls" loop="loop">
+          <source src="https://github.com/Duo-Owl/Order-66-TVO-Theme-Song/raw/refs/heads/main/Order%2066%20_%20TVO%20Theme%20Song.m4a" type="audio/mpeg" />
+        </audio></div>
+</td>
+<td style="vertical-align: middle; text-align: right; width: 62.3916%;"><span style="font-family: 'courier new', courier; font-size: 12px; color: #000000; text-shadow: 0 0 5px #ffffff;"><span style="color: #ecf0f1;">In celebration of 66 passed members</span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- SECTION: MEMBER GOALS -->
+<div style="background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 10px; padding: 20px; margin-bottom: 35px;">
+<p style="text-align: center; color: #3498db; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-top: 0; margin-bottom: 20px; letter-spacing: 2px;">Member Goals</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; font-size: 13px; text-align: center;"><!-- Achieved -->
+<div style="color: #2ecc71; font-weight: 600;">5 ✅</div>
+<div style="color: #2ecc71; font-weight: 600;">10 ✅</div>
+<div style="color: #2ecc71; font-weight: 600;">15 ✅</div>
+<div style="color: #2ecc71; font-weight: 600;">20 ✅</div>
+<div style="color: #2ecc71; font-weight: 600;">30 ✅</div>
+<div style="color: #2ecc71; font-weight: 600;">40 ✅</div>
+<div style="color: #2ecc71; font-weight: 600;">50 ✅️</div>
+<div style="color: #2ecc71; font-weight: 600;">75 ✅️</div>
+<!-- In Progress -->
+<div style="color: #666;"><strong><span style="color: #2dc26b;">100 ✅</span></strong></div>
+<div style="color: #666;">125</div>
+<div style="color: #666;">150</div>
+<div style="color: #666;">175</div>
+<!-- Ultimate Goal -->
+<div style="color: #f1c40f; font-weight: 800; grid-column: span 3; margin-top: 5px; font-size: 15px;">200!</div>
+</div>
+</div>
+<!-- Integrated Profile Audio Player Section -->
+<div onmouseover="this.style.transform='translateY(-3px) scale(1.01)'; this.style.boxShadow='0 0 25px rgba(255, 255, 255, 0.25)'; this.style.borderColor='#ffffff';" onmouseout="this.style.transform='translateY(0px) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'; this.style.borderColor='#222222';" style="background: #000000; border: 1px solid #222222; border-radius: 12px; padding: 25px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; max-width: 320px; margin: 0 auto; box-sizing: border-box; will-change: transform; transform: translateZ(0); text-align: center;">
+<p style="color: #666666; font-size: 10px; margin: 0 0 4px 0; letter-spacing: 2px; text-transform: uppercase; font-weight: bold;">🎵 music player</p>
+<p style="color: #ffffff; font-size: 13px; margin: 0 0 15px 0; font-weight: 600; text-shadow: 0 0 8px rgba(255,255,255,0.3);">Imperial Comms Channel</p>
+<div style="padding: 0 2px;"><iframe width="100%" height="180" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.7); border: 1px solid #222222;" src="
+https://www.youtube.com/embed/glV4moh4Ff8?autoplay=1&amp;mute=0&amp;rel=0&amp;controls=1" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen="allowfullscreen"></iframe></div>
+</div>
+<!-- CONFETTI BUTTON -->
+<div style="text-align: center; margin-top: 25px;"><button onclick="
+      for(let i=0;i&lt;500;i++){
+        let c=document.createElement('div');
+        c.innerHTML=['😎','‼️','💯','😄','✨'][Math.floor(Math.random()*6)];
+        c.style.position='fixed';
+        c.style.left=Math.random()*100+'vw';
+        c.style.top=(Math.random()*-160)+'px';
+        c.style.color=['#ffd700','#d4af37','#ffffff','#b8860b','#fff2a8'][Math.floor(Math.random()*5)];
+        c.style.fontSize=(Math.random()*24+10)+'px';
+        c.style.zIndex='99999';
+        c.style.pointerEvents='none';
+        c.style.transition='transform 4s linear, opacity 4s linear';
+        document.body.appendChild(c);
+        setTimeout(()=&gt;{
+          c.style.transform='translateY('+(window.innerHeight+400)+'px) rotate('+(Math.random()*1440)+'deg)';
+          c.style.opacity='0';
+        },10);
+        setTimeout(()=&gt;c.remove(),9500);
+      }
+    " onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 0 22px #ffd700';this.style.background='#111';" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 0 10px #d4af37';this.style.background='#050505';" style="background: #050505; color: #ffd7f0; border: 2px solid #d4af37; border-radius: 10px; padding: 10px 14px; font-weight: bold; box-shadow: 0 0 10px #d4af37; cursor: pointer; transition: all .3s ease; font-family: inherit;">&nbsp;🔥 Fire in the hole 🔥</button></div>
+</div>
+</div>
+
+</body>
+</html>
